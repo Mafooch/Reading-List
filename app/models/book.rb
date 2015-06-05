@@ -1,6 +1,7 @@
 class Book < ActiveRecord::Base
 
-  belongs_to :genre
+  has_many :book_genres
+  has_many :genres, through: :book_genres
 
   def finished?
     finished_on.present?

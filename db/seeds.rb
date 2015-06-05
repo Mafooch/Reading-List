@@ -1,8 +1,10 @@
 Book.destroy_all
 Genre.destroy_all
+BookGenre.destroy_all
 
 fiction = Genre.create!(name: 'Fiction') #don't want to fail silently
 non_fiction = Genre.create!(name: 'Non-fiction')
+political = Genre.create!(name: 'Political')
 
 Book.create!([{
   title: "The Stranger",
@@ -11,8 +13,8 @@ Book.create!([{
   amazon_id: "0679720200",
   rating: 6,
   finished_on: 25.days.ago,
-  genre: fiction #rails is reading id off the fiction object above and assigning
-  # it to the foreign key 'genre_id' here
+  genres: [fiction] #rails is reading id off the fiction object above and
+  # creating a record in the book_genre table
 },
 {
   title: "Common Sense",
@@ -24,7 +26,7 @@ A selection of the Common Core State Standards Initiative.",
   amazon_id: "0486296024",
   rating: 6,
   finished_on: 50.days.ago,
-  genre: non_fiction
+  genres: [non_fiction, political]
 },
 {
   title: "The Lean Startup",
@@ -33,7 +35,7 @@ A selection of the Common Core State Standards Initiative.",
   amazon_id: "9780307887894",
   rating: 5,
   finished_on: nil,
-  genre: non_fiction
+  genres: [non_fiction] # must use array because now it's in a m2m join table
 },
 {
   title: "The Devil Reads Derrida",
@@ -42,7 +44,7 @@ A selection of the Common Core State Standards Initiative.",
   amazon_id: "0802864074",
   rating: 7,
   finished_on: 30.days.ago,
-  genre: non_fiction
+  genres: [non_fiction]
 }])
 
 p "Created #{Book.count} books"
