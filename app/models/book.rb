@@ -1,5 +1,7 @@
 class Book < ActiveRecord::Base
 
+  belongs_to :genre
+
   def finished?
     finished_on.present?
   end

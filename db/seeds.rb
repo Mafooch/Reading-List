@@ -1,4 +1,8 @@
 Book.destroy_all
+Genre.destroy_all
+
+fiction = Genre.create!(name: 'Fiction') #don't want to fail silently
+non_fiction = Genre.create!(name: 'Non-fiction')
 
 Book.create!([{
   title: "The Stranger",
@@ -6,7 +10,9 @@ Book.create!([{
   description: "Through the story of an ordinary man unwittingly drawn into a senseless murder on an Algerian beach, Camus explored what he termed 'the nakedness of man faced with the absurd.' First published in 1946; now in a new translation by Matthew Ward.",
   amazon_id: "0679720200",
   rating: 6,
-  finished_on: 25.days.ago
+  finished_on: 25.days.ago,
+  genre: fiction #rails is reading id off the fiction object above and assigning
+  # it to the foreign key 'genre_id' here
 },
 {
   title: "Common Sense",
@@ -17,7 +23,8 @@ Today, Common Sense remains a landmark document in the struggle for freedom, dis
 A selection of the Common Core State Standards Initiative.",
   amazon_id: "0486296024",
   rating: 6,
-  finished_on: 50.days.ago
+  finished_on: 50.days.ago,
+  genre: non_fiction
 },
 {
   title: "The Lean Startup",
@@ -25,7 +32,8 @@ A selection of the Common Core State Standards Initiative.",
   description: "Most startups fail. But many of those failures are preventable.  The Lean Startup is a new approach being adopted across the globe, changing the way companies are built and new products are launched.",
   amazon_id: "9780307887894",
   rating: 5,
-  finished_on: nil
+  finished_on: nil,
+  genre: non_fiction
 },
 {
   title: "The Devil Reads Derrida",
@@ -33,7 +41,8 @@ A selection of the Common Core State Standards Initiative.",
   description: "“We hear a lot these days about the quest for alternative sources of energy. Has anyone considered Jamie Smith? This whirling dervish of public philosophy generates enough intellectual energy to supply a middle-size city all by himself.” — John Wilson / editor of Books & Culture / “By now, Jamie Smith is not just a leading ‘philosophical’ or ‘postmodern’ or ‘Reformed’ theologian: he is simply a leading theologian. This volume shows that he has not only ascended to that height but also descended to a depth that terrifies most academics — journalism. He offers a theology as everyday as the neighborhood, the movies, partisan politics, the university, and the street corner — and with a twinkle in his eye he shows us Jesus’ lordship in each place. I hope others will not just read Jamie’s book, but will go and do likewise.” — Jason Byassee / Center for Theology, Writing & Media, Duke Divinity School / A notable young voice in the academy, James K. A. Smith has consistently spoken to the church as the most important “public” for his intellectual work. Bringing together essays both thoughtful and entertaining, The Devil Reads Derrida displays some of Smith’s most significant forays into the public arena. / In this engaging work Smith grapples with the Wild at Heart phenomenon and the challenges of secularization, deals with sex and consumerism, and comments on creative works from American Beauty and Harry Potter to A History of Violence and the poetry of Franz Wright. No matter what.",
   amazon_id: "0802864074",
   rating: 7,
-  finished_on: 30.days.ago
+  finished_on: 30.days.ago,
+  genre: non_fiction
 }])
 
 p "Created #{Book.count} books"
