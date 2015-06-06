@@ -25,6 +25,7 @@
       <th>Author</th>
       <th>Description</th>
       <th>Rating</th>
+      <th>Genre</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -36,6 +37,11 @@
         <td><%= book.author %></td>
         <td><%= book.description %></td>
         <td><%= book.rating %></td>
+        <td>
+          <% book.genres.each do |genre| %>
+            <%= link_to(genre.name, '#', class: 'label label-primary') %>
+          <% end %>
+        </td>
         <td>
           <a href="#" target="_blank">
             <%= image_from_amazon(book.amazon_id) %>
@@ -50,5 +56,17 @@
 </table>
 
 <br>
+
+<div class="col-sm-4">
+  <h2>Genres</h2>
+  <ul class="list-unstyled">
+    <% @genres.each do |genre| %>
+      <li>
+        <%= link_to(genre.name, books_path(filter: genre.id),
+          class: 'label label-primary') %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <%= link_to 'New Book', new_book_path %>
