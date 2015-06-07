@@ -62,7 +62,9 @@
   <ul class="list-unstyled">
     <% @genres.each do |genre| %>
       <li>
-        <%= link_to(genre.name, books_path(filter: genre.id),
+        <!-- just passing a variable called filter into the params that
+        will be accessed inside the index controller-->
+        <%= link_to(genre.name, books_path(filter: genre.name),
           class: 'label label-primary') %>
       </li>
     <% end %>

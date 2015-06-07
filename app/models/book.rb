@@ -32,6 +32,13 @@ class Book < ActiveRecord::Base
   #   end
   # end
 
+  scope :filter, ->(name){
+    joins(:genres).where(genres: { name: name }) if name.present?
+  }
+  # now the genre_id will be hidden from user when they click the link and
+  # instead they'll see they genre name itself. this requires two inner joins:
+  # one on books and book_genres and the next on book_genres and genres
+
   before_save :set_keywords # using a callback
   # we're creating and calling this method for the purpose of the search feature
   # putting all the keywords in one place instead of having to fuzzy search
