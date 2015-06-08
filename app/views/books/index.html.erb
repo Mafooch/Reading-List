@@ -64,7 +64,7 @@
 
         <div class='form-group'>
           <legend>Rating</legend>
-          <% (1..5).each do |rating| %>
+          <% (1..10).each do |rating| %>
             <label class='radio-inline'>
               <%= rating %><%= f.radio_button :rating, rating %>
             </label>

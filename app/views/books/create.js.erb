@@ -1,0 +1,5 @@
+$('.book-list').prepend('<%=j render @book %>'); // places the string from the li
+// partial and js prepends to the beginning of the unordered list in index
+// j is a method to escape the javascript
+$('#new_book').trigger('reset');
+$('.book-form').slideUp();
